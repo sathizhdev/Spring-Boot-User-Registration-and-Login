@@ -44,21 +44,7 @@ public class FormController {
 		mv.setViewName("register.jsp");
 		return mv;
 	}
-	
-	
-	
-	
-	
-	//returns to login page(localhost:8886/) using jsp
-	@RequestMapping("/r")
-	public String registration1(userDetails user)
-	{ 
-			return "register1.jsp";
-	}
-			
-	
-
-	
+		
 	
 	//to save the user in userdetails table
 	@RequestMapping("/Register")
@@ -131,10 +117,7 @@ public class FormController {
 	   
 		
 		welcomeUserView.addObject("username",user_Name);
-		return welcomeUserView;		
-		
-		
-			
+		return welcomeUserView;				
 	}
 	
 	
@@ -155,53 +138,5 @@ public class FormController {
 	}
 	
 	
-	
-	   @PostMapping("/add")
-	    public ResponseEntity<Object> adduser( @RequestBody userDetails user) {
-		   
-	        userserviceimpl.addUser(user);
-	        return new ResponseEntity<>("Account Created SuccessFully!", HttpStatus.OK);
-	    }
 	   
-	   
-	   @PostMapping("/logincheck")
-	   public ResponseEntity<Object> Logincheck(@RequestBody userDetails user) throws ValidationException
-	   {
-		      
-		   String userName = user.getUserName();
-		   String password = user.getPassword();
-		   
-		   Boolean isLoginApproved = userserviceimpl.isLoginApproved(userName,password);
-		   
-		   if(isLoginApproved) 
-		       return new ResponseEntity<>("Logged in SuccessFully!", HttpStatus.OK);
-		   else
-			   return new ResponseEntity<>("Invalid Account Details!", HttpStatus.OK);
-			   
-	   }
-	
-	   
-	   //restApi Show all users
-	   
-	   @GetMapping("/showall")
-	   public List<userDetails> showAllUsers()
-	   {
-		   
-		   List<userDetails> users = userserviceimpl.showAllUsers();
-		   return users;
-		      
-	   }
-	   
-	   
-	   //restApi get userdetails by id
-	   
-	   
-	   @GetMapping("/show/{username}")
-	   public Optional<userDetails> showuser(@PathVariable("username") String userName)
-	   {
-		   
-		  return userserviceimpl.findById(userName);
-	   
-	   }
-	   		
 }

@@ -76,6 +76,26 @@ public class userServiceimpl implements userService  {
 
     }
 	
+	
+	public Boolean isLoginApproved1(String username, String password) throws ValidationException 
+
+	{
+		
+		List<userDetails> userlist = repo.loginCheck(username,password);
+		
+
+		if (userlist.size()>0)
+		{
+			return true; 	
+		}
+		
+		else
+		{
+			return false;
+		}
+
+    }
+	
 
 
 	
@@ -130,6 +150,10 @@ public class userServiceimpl implements userService  {
 
 
 
+	  public void deleteUser(String username)
+	  {
+		  repo.deleteById(username);
+	  }
 
 		
 	
